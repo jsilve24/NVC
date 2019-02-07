@@ -1,0 +1,17 @@
+Package: NVC
+Type: Package
+Title: Estimate Estimate Variance Components for Gaussian Model (Normal Variance Components)
+Version: 0.1
+Date: 2019-02-07
+Author: Justin Silverman
+Authors@R: c(person("Justin", "Silverman", role=c("aut", "cre"),
+                     email = "Justin.Silverman@duke.edu"))
+Maintainer: Justin Silverman
+    <Justin.Silverman@duke.edu>
+Description: Estimates Variance Component model of form 
+  y~N(mu, delta_1 U_1+...+delta_p U_p) for known y, mu, and U. Key functionality
+  implemented in C++ Using Eigen for scalability. 
+License: GPL-3
+Imports: Rcpp (>= 1.0.0), RcppEigen (>= 0.3.3.5.0), RcppNumerical
+LinkingTo: Rcpp, RcppEigen, RcppNumerical
+Suggests: testthat
