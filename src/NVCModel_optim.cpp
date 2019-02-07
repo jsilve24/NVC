@@ -19,6 +19,17 @@ using Eigen::VectorXd;
 //' @return List: LogLik is log likelihood at optimima. Pars argument is ells. 
 //' @export
 //' @md
+//' @examples
+//'   N <- 1000
+//'   I <- diag(N)
+//'   U1 <- diag(N)
+//'   U2 <-  rWishart(1, N+10, diag(N))[,,1]
+//'   ell <- c(0.0001, 3)
+//'   Sigma <- exp(ell[1])*U1 + exp(ell[2])*U2
+//'   L <- t(chol(Sigma))
+//'   mu <- rep(4, N)
+//'   y <- mu + L %*% rnorm(N) 
+//'   fit <- optimNVC(y, mu, rbind(U1, U2), c(0,0))
 // [[Rcpp::export]]
 List optimNVC(const Eigen::VectorXd y, const Eigen::VectorXd mu, 
               const Eigen::MatrixXd U, Eigen::VectorXd ellinit){
