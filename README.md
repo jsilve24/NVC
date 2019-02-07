@@ -8,6 +8,12 @@ Given `y`, `mu`, `U_1`, ..., `U_p` fits the following model to estimate `ell_1`,
 * Key Functionality implemented in C++ using RcppEigen for scalability. 
 * Optimization Performed using L-BFGS implementaion wrapped by RcppNumerical. 
 
+# Installation Instructions
+
+```
+devtools::install_github("jsilve24/NVC")
+```
+
 # Example Use
 ```
   N <- 1000
