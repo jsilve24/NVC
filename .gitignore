@@ -4,3 +4,6 @@
 /.Rhistory
 *.so
 *.o
+/src/NVC.so
+/src/NVCModel_optim.o
+/src/RcppExports.o
