@@ -7,8 +7,8 @@
 using namespace Rcpp;
 
 // optimNVC
-List optimNVC(const Eigen::VectorXd y, const Eigen::VectorXd mu, const Eigen::MatrixXd U, Eigen::VectorXd ellinit);
-RcppExport SEXP _NVC_optimNVC(SEXP ySEXP, SEXP muSEXP, SEXP USEXP, SEXP ellinitSEXP) {
+List optimNVC(const Eigen::VectorXd y, const Eigen::VectorXd mu, const Eigen::MatrixXd U, Eigen::VectorXd ellinit, const int max_iter, const double eps_f, const double eps_g);
+RcppExport SEXP _NVC_optimNVC(SEXP ySEXP, SEXP muSEXP, SEXP USEXP, SEXP ellinitSEXP, SEXP max_iterSEXP, SEXP eps_fSEXP, SEXP eps_gSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -16,13 +16,16 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const Eigen::VectorXd >::type mu(muSEXP);
     Rcpp::traits::input_parameter< const Eigen::MatrixXd >::type U(USEXP);
     Rcpp::traits::input_parameter< Eigen::VectorXd >::type ellinit(ellinitSEXP);
-    rcpp_result_gen = Rcpp::wrap(optimNVC(y, mu, U, ellinit));
+    Rcpp::traits::input_parameter< const int >::type max_iter(max_iterSEXP);
+    Rcpp::traits::input_parameter< const double >::type eps_f(eps_fSEXP);
+    Rcpp::traits::input_parameter< const double >::type eps_g(eps_gSEXP);
+    rcpp_result_gen = Rcpp::wrap(optimNVC(y, mu, U, ellinit, max_iter, eps_f, eps_g));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_NVC_optimNVC", (DL_FUNC) &_NVC_optimNVC, 4},
+    {"_NVC_optimNVC", (DL_FUNC) &_NVC_optimNVC, 7},
     {NULL, NULL, 0}
 };
 

@@ -13,6 +13,9 @@ using Eigen::VectorXd;
 //' @param mu mean vector (N dimensional)
 //' @param U PQ x Q matrix of P Variance Components
 //' @param ellinit P vector of initialization values for ell
+//' @param max_iter maximum iterations for optimization
+//' @param eps_f optimization stopping threshold for log-likelihood improvement 
+//' @param eps_g optimization stopping threshold for gradient 
 //' @details Fits the following model (for unknown ell)
 //'   \deqn{y ~ N(mu, e^{ell_1}U_1 + ...+ e^{ell_P}U_1)}
 //' using L-BFGS optimization implemented in optimized C++ code. 
@@ -32,7 +35,8 @@ using Eigen::VectorXd;
 //'   fit <- optimNVC(y, mu, rbind(U1, U2), c(0,0))
 // [[Rcpp::export]]
 List optimNVC(const Eigen::VectorXd y, const Eigen::VectorXd mu, 
-              const Eigen::MatrixXd U, Eigen::VectorXd ellinit){
+              const Eigen::MatrixXd U, Eigen::VectorXd ellinit, 
+              const int max_iter=10000, const double eps_f = 1e-9, const double eps_g = 1e-6){
   int N = y.rows();
   int Q = U.cols();
   int P = U.rows()/Q;
@@ -41,7 +45,7 @@ List optimNVC(const Eigen::VectorXd y, const Eigen::VectorXd mu,
   VectorXd ell = ellinit;
   
   double nllopt; 
-  int status = Numer::optim_lbfgs(mod, ell, nllopt);
+  int status = Numer::optim_lbfgs(mod, ell, nllopt, max_iter, eps_f, eps_g);
   
   List out(2);
   out.names() = CharacterVector::create("LogLik", "ell");

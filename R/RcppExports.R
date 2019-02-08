@@ -6,6 +6,9 @@
 #' @param mu mean vector (N dimensional)
 #' @param U PQ x Q matrix of P Variance Components
 #' @param ellinit P vector of initialization values for ell
+#' @param max_iter maximum iterations for optimization
+#' @param eps_f optimization stopping threshold for log-likelihood improvement 
+#' @param eps_g optimization stopping threshold for gradient 
 #' @details Fits the following model (for unknown ell)
 #'   \deqn{y ~ N(mu, e^{ell_1}U_1 + ...+ e^{ell_P}U_1)}
 #' using L-BFGS optimization implemented in optimized C++ code. 
@@ -23,7 +26,7 @@
 #'   mu <- rep(4, N)
 #'   y <- mu + L %*% rnorm(N) 
 #'   fit <- optimNVC(y, mu, rbind(U1, U2), c(0,0))
-optimNVC <- function(y, mu, U, ellinit) {
-    .Call('_NVC_optimNVC', PACKAGE = 'NVC', y, mu, U, ellinit)
+optimNVC <- function(y, mu, U, ellinit, max_iter = 10000L, eps_f = 1e-9, eps_g = 1e-6) {
+    .Call('_NVC_optimNVC', PACKAGE = 'NVC', y, mu, U, ellinit, max_iter, eps_f, eps_g)
 }
 

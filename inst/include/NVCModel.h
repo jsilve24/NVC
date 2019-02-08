@@ -51,6 +51,10 @@ public:
       grad(i) -= e.transpose()*SigmaInv*U.middleRows(i*Q, Q)*SigmaInv*e;
       grad(i) *= 0.5*exp(pars(i));
     }
+    Rcout << "ell: " << pars << std::endl;
+    Rcout << "grad: " << grad << std::endl;
+    Rcout << "loglik: " << 0.5*(logdetSigma + e.transpose()*SigmaInv*e) << std::endl;
+    Rcout << std::endl;
     
     return 0.5*(logdetSigma + e.transpose()*SigmaInv*e);
   }

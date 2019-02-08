@@ -4,7 +4,8 @@
 \alias{optimNVC}
 \title{Function to optimize the NVCModel}
 \usage{
-optimNVC(y, mu, U, ellinit)
+optimNVC(y, mu, U, ellinit, max_iter = 10000L, eps_f = 1e-09,
+  eps_g = 1e-06)
 }
 \arguments{
 \item{y}{N vector of observations}
@@ -14,6 +15,12 @@ optimNVC(y, mu, U, ellinit)
 \item{U}{PQ x Q matrix of P Variance Components}
 
 \item{ellinit}{P vector of initialization values for ell}
+
+\item{max_iter}{maximum iterations for optimization}
+
+\item{eps_f}{optimization stopping threshold for log-likelihood improvement}
+
+\item{eps_g}{optimization stopping threshold for gradient}
 }
 \value{
 List: LogLik is log likelihood at optimima. Pars argument is ells.
